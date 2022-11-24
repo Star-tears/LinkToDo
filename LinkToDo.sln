@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkToDo", "LinkToDo.csproj", "{8ADF840A-48A4-4B7B-BB9F-28E3E7896B82}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8ADF840A-48A4-4B7B-BB9F-28E3E7896B82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ADF840A-48A4-4B7B-BB9F-28E3E7896B82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ADF840A-48A4-4B7B-BB9F-28E3E7896B82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ADF840A-48A4-4B7B-BB9F-28E3E7896B82}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D2B5742-1A48-41E0-A884-6DDF232E0C65}
+	EndGlobalSection
+EndGlobal

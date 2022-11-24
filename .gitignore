@@ -1,0 +1,6 @@
+packages
+bin
+.vs
+obj
+Myscripts/MysqlBase.cs
+Myscripts/QiniuBase.cs

@@ -1,0 +1,63 @@
+﻿<Page x:Class="LinkToDo.Pages.TodolistPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LinkToDo.Pages" xmlns:local1="clr-namespace:LinkToDo.Components"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TodolistPage" Loaded="Page_Loaded">
+    <Page.RenderTransform>
+        <TranslateTransform X="0" Y="0"/>
+    </Page.RenderTransform>
+    <Border x:Name="mainBorder" CornerRadius="20" Background="{DynamicResource SecondaryBlueColorA}">
+        <Grid>
+            <ScrollViewer x:Name="todolistPanelScr" Grid.ZIndex="0" Margin="0" VerticalScrollBarVisibility="Auto" ScrollChanged="todolistPanelScr_ScrollChanged">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                        <Button Content="123" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
+                        <Button Content="123" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
+                        <Button Content="123" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
+                        <Button Content="1456" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
+                        <Button Content="123" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
+                        <Button Content="123" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
+                        <Button Content="123" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
+                        <Button Content="1456" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
+                        <Button Content="123" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
+                        <Button Content="123" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
+                        <Button Content="123" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
+                        <Button Content="1456" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+            <Border x:Name="b1" Grid.ZIndex="1" Height="70" VerticalAlignment="Top" Background="{DynamicResource SecondaryBlueColor}" Opacity="0.5">
+            </Border>
+            <Border Grid.ZIndex="2" VerticalAlignment="Top" Height="{Binding Height, ElementName=b1}">
+                <Border.Background>
+                    <VisualBrush Stretch="UniformToFill" Visual="{Binding ElementName=b1}"/>
+                </Border.Background>
+                <Border.Effect>
+                    <BlurEffect Radius="10" RenderingBias="Performance"></BlurEffect>
+                </Border.Effect>
+            </Border>
+            
+            <StackPanel x:Name="titlePanel" Grid.ZIndex="3" Orientation="Vertical" VerticalAlignment="Top"  Background="Transparent">
+                <Grid Margin="0 7 0 0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Path Data="{DynamicResource home}" Margin="64 0 0 0" Stretch="Fill" Fill="{DynamicResource PrimaryBlueColorA}" Width="24" Height="24" HorizontalAlignment="Left"/>
+                        <Label Content="任务" Margin="8 0 0 0" Foreground="{DynamicResource PrimaryBlueColorA}" FontSize="28" FontWeight="Bold"/>
+                    </StackPanel>
+
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.ZIndex="2" Orientation="Vertical" VerticalAlignment="Bottom">
+
+            </StackPanel>
+        </Grid>
+
+    </Border>
+</Page>

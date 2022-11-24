@@ -1,0 +1,48 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:LinkToDo.Themes">
+    <!-- Background Colors -->
+    <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="#f3f3f3"/>
+    <SolidColorBrush x:Key="SecondaryBackgroundColor" Color="#f9f9f9"/>
+
+    <!-- Primary Colors -->
+    <SolidColorBrush x:Key="PrimaryBlueColor" Color="#5B7FFF"/>
+    <SolidColorBrush x:Key="PrimaryBlueColorA" Color="#3063ab"/>
+    <SolidColorBrush x:Key="PrimaryGrayColor" Color="#BFBFC4"/>
+
+    <!-- Secondary Colors -->
+    <SolidColorBrush x:Key="SecondaryBlueColor" Color="#CEE8FB"/>
+    <SolidColorBrush x:Key="SecondaryBlueColorA" Color="#dfedf9"/>
+    <SolidColorBrush x:Key="SecondaryGrayColor" Color="#EEEEEE"/>
+    <SolidColorBrush x:Key="SecondaryRedColorA" Color="#FF5555"/>
+
+    <!-- Colors -->
+    <SolidColorBrush x:Key="GREEN_E" Color="#699C52"/>
+    <SolidColorBrush x:Key="GREEN_D" Color="#77B05D"/>
+    <SolidColorBrush x:Key="GREEN_C" Color="#83C167"/>
+    <SolidColorBrush x:Key="GREEN_B" Color="#A6CF8C"/>
+    <SolidColorBrush x:Key="GREEN_A" Color="#C9E2AE"/>
+    <SolidColorBrush x:Key="GOLD_E" Color="#C78D46"/>
+    <SolidColorBrush x:Key="GOLD_D" Color="#E1A158"/>
+    <SolidColorBrush x:Key="GOLD_C" Color="#F0AC5F"/>
+    <SolidColorBrush x:Key="GOLD_B" Color="#F9B775"/>
+    <SolidColorBrush x:Key="GOLD_A" Color="#F7C797"/>
+    <SolidColorBrush x:Key="TEAL_E" Color="#468847"/>
+    <SolidColorBrush x:Key="TEAL_D" Color="#73A857"/>
+    <SolidColorBrush x:Key="TEAL_C" Color="#ABD66B"/>
+    <SolidColorBrush x:Key="TEAL_B" Color="#E2F2C7"/>
+    <SolidColorBrush x:Key="TEAL_A" Color="#EBF5E6"/>
+    <SolidColorBrush x:Key="PURPLE_E" Color="#644172"/>
+    <SolidColorBrush x:Key="PURPLE_D" Color="#715582"/>
+    <SolidColorBrush x:Key="PURPLE_C" Color="#9A72AC"/>
+    <SolidColorBrush x:Key="PURPLE_B" Color="#B189C6"/>
+    <SolidColorBrush x:Key="PURPLE_A" Color="#CAA3E8"/>
+
+    <!-- Typograhy Colors -->
+    <SolidColorBrush x:Key="TextPrimaryColor" Color="#020F16"/>
+    <SolidColorBrush x:Key="TextPrimaryBlueColorA" Color="#3063ab"/>
+    <SolidColorBrush x:Key="TextSecondaryColor" Color="#434344"/>
+
+    <!-- Icons Colors -->
+    <SolidColorBrush x:Key="ActionIconColor" Color="#434344"/>
+</ResourceDictionary>
