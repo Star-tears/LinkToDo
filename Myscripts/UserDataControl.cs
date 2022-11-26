@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HandyControl.Controls;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -22,11 +23,11 @@ namespace LinkToDo.Myscripts
             int res = mysqlBase.commonExecute(sql);
             if (res > 0)
             {
-                MessageBox.Show("更新成功");
+                Growl.Success("数据添加成功！");
             }
             else
             {
-                MessageBox.Show("更新失败");
+                Growl.Warning("数据添加失败！");
             }
         }
         public void updateUserInfo(UserInfo userInfo)
@@ -35,11 +36,11 @@ namespace LinkToDo.Myscripts
             int res = mysqlBase.commonExecute(sql);
             if (res > 0)
             {
-                MessageBox.Show("更新成功");
+                Growl.Success("数据更新成功！");
             }
             else
             {
-                MessageBox.Show("更新失败");
+                Growl.Warning("数据更新失败！");
             }
         }
         public void deleteUserInfo(UserInfo userInfo)
@@ -48,11 +49,11 @@ namespace LinkToDo.Myscripts
             int res = mysqlBase.commonExecute(sql);
             if (res > 0)
             {
-                MessageBox.Show("更新成功");
+                Growl.Success("数据删除成功！");
             }
             else
             {
-                MessageBox.Show("更新失败");
+                Growl.Warning("数据删除失败！");
             }
         }
         public DataTable queryUserInfo()
@@ -62,13 +63,14 @@ namespace LinkToDo.Myscripts
             DataTable dt = ds.Tables[0];
             if (dt.Rows.Count != 0)
             {
+                Growl.Info("数据拉取成功");
                 string uuid = (string)dt.Rows[0][0];
                 string name = (string)dt.Rows[0][1];
                 return dt;
             }
             else
             {
-                MessageBox.Show("无数据");
+                Growl.Info("暂无数据");
             }
             return dt;
         }

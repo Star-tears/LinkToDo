@@ -4,58 +4,115 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LinkToDo.Pages" xmlns:local1="clr-namespace:LinkToDo.Components"
+      xmlns:hc="https://handyorg.github.io/handycontrol"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TodolistPage" Loaded="Page_Loaded">
     <Page.RenderTransform>
         <TranslateTransform X="0" Y="0"/>
     </Page.RenderTransform>
-    <Border x:Name="mainBorder" CornerRadius="20" Background="{DynamicResource SecondaryBlueColorA}">
+    <Border Style="{StaticResource BorderClip}" x:Name="mainBorder" CornerRadius="20" Background="{DynamicResource SecondaryBlueColorA}">
         <Grid>
-            <ScrollViewer x:Name="todolistPanelScr" Grid.ZIndex="0" Margin="0" VerticalScrollBarVisibility="Auto" ScrollChanged="todolistPanelScr_ScrollChanged">
-                <Grid>
+            <ScrollViewer x:Name="todolistPanelScr" Grid.ZIndex="0" Margin="0" VerticalScrollBarVisibility="Auto">
+                <Grid Margin="32 8 32 8">
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                        <Button Content="123" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
-                        <Button Content="123" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
-                        <Button Content="123" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
-                        <Button Content="1456" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
-                        <Button Content="123" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
-                        <Button Content="123" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
-                        <Button Content="123" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
-                        <Button Content="1456" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
-                        <Button Content="123" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
-                        <Button Content="123" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
-                        <Button Content="123" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
-                        <Button Content="1456" Margin="5 5 5 5" Background="#f4f5f6" Height="50"/>
+                    <StackPanel x:Name="todoList1" Grid.Row="0" Orientation="Vertical" VerticalAlignment="Top">
+                        <Border Height="64"/>
+                        <local1:TodoUnit/>
+                        <local1:TodoUnit/>
+                        <local1:TodoUnit/>
+                    </StackPanel>
+                    <Button x:Name="moreBtn" Grid.Row="1" HorizontalAlignment="Left" Margin="0 10 0 10" Click="moreBtn_Click">
+                        <Button.Background>
+                            <SolidColorBrush Opacity="0.5" Color="White"/>
+                        </Button.Background>
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Path x:Name="moreIcon" Data="{DynamicResource more}" Stretch="Uniform" Fill="{DynamicResource PrimaryBlueColorA}" Width="12" Height="12" Margin="0 0 8 0" RenderTransformOrigin="0.5,0.5">
+                                    <Path.RenderTransform>
+                                        <RotateTransform Angle="90"/>
+                                    </Path.RenderTransform>
+                                </Path>
+                                <hc:SimpleText Text="已完成" Foreground="{DynamicResource TextPrimaryBlueColorA}"/>
+                                <hc:SimpleText Text="0" Foreground="{DynamicResource TextPrimaryBlueColorA}" Margin="12 0 0 0"/>
+                            </StackPanel>
+
+                        </Button.Content>
+                    </Button>
+                    <StackPanel x:Name="todoList2" Grid.Row="2" Orientation="Vertical" VerticalAlignment="Top">
+                        <local1:TodoUnit/>
+                        <local1:TodoUnit/>
+                        <local1:TodoUnit/>
+                        <local1:TodoUnit/>
+                        <local1:TodoUnit/>
+                        <local1:TodoUnit/>
+                        <local1:TodoUnit/>
+                        <local1:TodoUnit/>
+                        <local1:TodoUnit/>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
-            <Border x:Name="b1" Grid.ZIndex="1" Height="70" VerticalAlignment="Top" Background="{DynamicResource SecondaryBlueColor}" Opacity="0.5">
-            </Border>
-            <Border Grid.ZIndex="2" VerticalAlignment="Top" Height="{Binding Height, ElementName=b1}">
+            <Border x:Name="b1" Grid.ZIndex="1" Height="70" VerticalAlignment="Top" Background="{DynamicResource SecondaryBlueColorA}" Opacity="0.8"/>
+            <!--<Border Grid.ZIndex="2" VerticalAlignment="Top" Height="{Binding Height, ElementName=b1}">
                 <Border.Background>
                     <VisualBrush Stretch="UniformToFill" Visual="{Binding ElementName=b1}"/>
                 </Border.Background>
                 <Border.Effect>
                     <BlurEffect Radius="10" RenderingBias="Performance"></BlurEffect>
                 </Border.Effect>
-            </Border>
-            
+            </Border>-->
+
             <StackPanel x:Name="titlePanel" Grid.ZIndex="3" Orientation="Vertical" VerticalAlignment="Top"  Background="Transparent">
                 <Grid Margin="0 7 0 0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         <Path Data="{DynamicResource home}" Margin="64 0 0 0" Stretch="Fill" Fill="{DynamicResource PrimaryBlueColorA}" Width="24" Height="24" HorizontalAlignment="Left"/>
-                        <Label Content="任务" Margin="8 0 0 0" Foreground="{DynamicResource PrimaryBlueColorA}" FontSize="28" FontWeight="Bold"/>
+                        <hc:SimpleText Text="任务" Margin="16 8 0 0" VerticalAlignment="Bottom" Foreground="{DynamicResource PrimaryBlueColorA}" FontSize="28" FontWeight="Bold"/>
                     </StackPanel>
 
                 </Grid>
             </StackPanel>
-            <StackPanel Grid.ZIndex="2" Orientation="Vertical" VerticalAlignment="Bottom">
-
+            <Border x:Name="b2" Grid.ZIndex="1" Height="90" VerticalAlignment="Bottom" Background="{DynamicResource SecondaryBlueColorA}" Opacity="0.8"/>
+            <StackPanel Grid.ZIndex="3" Orientation="Vertical" VerticalAlignment="Bottom">
+                <Border Height="Auto" CornerRadius="10" Background="{StaticResource SecondaryBackgroundColor}" Margin="32 8 32 4" MouseDown="Border_MouseDown">
+                    <Border.Opacity>
+                        0.75
+                    </Border.Opacity>
+                    <Grid Height="80">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Path x:Name="g0Focus0" Grid.Column="0" Visibility="Visible" Data="{DynamicResource add}" Stretch="Fill" Fill="{DynamicResource TextSecondaryColor}" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Path x:Name="g0Focus1" Grid.Column="0" Visibility="Collapsed" Data="{DynamicResource uncheckedcircle}" Stretch="Fill" Stroke="{DynamicResource TextSecondaryColor}" StrokeThickness="1" Fill="{DynamicResource TextSecondaryColor}" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        
+                        <Grid x:Name="g1Focus0" Grid.Column="1" VerticalAlignment="Center">
+                            <hc:SimpleText Text="添加任务" FontSize="15"/>
+                        </Grid>
+                        <Grid x:Name="g1Focus1" Grid.Column="1" VerticalAlignment="Center" Visibility="Collapsed">
+                            <StackPanel Orientation="Vertical">
+                                <hc:TextBox x:Name="todoTaskContentTextBox" hc:InfoElement.Placeholder="请输入任务内容" TextChanged="todoTaskContentTextBox_TextChanged" Background="Transparent" Margin="0 0 8 0" GotFocus="todoTaskContentTextBox_GotFocus" LostFocus="todoTaskContentTextBox_LostFocus"/>
+                                <StackPanel Orientation="Horizontal" Margin="0 8 0 0">
+                                    <hc:SimpleText Text="已选关联人:" Width="70"/>
+                                    <hc:SimpleText Text="无"/>
+                                </StackPanel>
+                            </StackPanel>
+                            
+                        </Grid>
+                        <StackPanel x:Name="spFuncArea" Grid.Column="2" Orientation="Horizontal" Margin="0 0 8 0" Visibility="Collapsed">
+                            <hc:Divider Orientation="Vertical" Width="10" Height="60"/>
+                            <StackPanel x:Name="functionalArea" Grid.Column="2" VerticalAlignment="Center" Width="Auto" Orientation="Vertical">
+                            <Button Style="{StaticResource ButtonPrimary}" Content="添加关联人" Width="200"/>
+                                <hc:DateTimePicker Style="{StaticResource DateTimePickerExtend}" hc:InfoElement.Title="提醒日期:" hc:InfoElement.TitlePlacement="Left" Margin="0 4 0 0"/>
+                            </StackPanel>
+                        </StackPanel>
+                        
+                    </Grid>
+                </Border>
             </StackPanel>
         </Grid>
 

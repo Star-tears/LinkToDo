@@ -4,8 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LinkToDo.Components"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" MouseDown="UserControl_MouseDown">
+             d:DesignHeight="450" d:DesignWidth="800" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" MouseDown="UserControl_MouseDown" Unloaded="UserControl_Unloaded">
+    <UserControl.RenderTransform>
+        <TranslateTransform Y="0"/>
+    </UserControl.RenderTransform>
     <Border CornerRadius="10" Background="{DynamicResource SecondaryBlueColorA}" Width="200" Height="200" >
         <Border x:Name="mainBorder" CornerRadius="10" Background="{StaticResource SecondaryBackgroundColor}" Opacity="0.7" Width="180" Height="180" Cursor="Hand">
             <Border.Triggers>
@@ -35,25 +39,25 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" CornerRadius="10" Margin="2 5 2 2">
-                    <Image x:Name="img" Source="https://src.star-tears.cn/img-bed/gitee-img-bed-before/4k%E5%A3%81%E7%BA%B8.jpg"/>
+                <Border Style="{StaticResource BorderClip}" Grid.Row="0" CornerRadius="10" Margin="10 5 10 4">
+                    <Image x:Name="img" Source="https://src.star-tears.cn/img-bed/gitee-img-bed-before/4k%E5%A3%81%E7%BA%B8.jpg" Stretch="UniformToFill"/>
                 </Border>
                 <!--#region 姓名-->
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Label Content="姓名:" Margin="3 0 0 0" Foreground="{DynamicResource TextPrimaryColor}"/>
-                    <Label x:Name="nameLabel" Content="Star-tears" Foreground="{DynamicResource TextPrimaryColor}"/>
+                    <hc:SimpleText Text="姓名:" VerticalAlignment="Center" Margin="5 0 0 0" Foreground="{DynamicResource TextPrimaryColor}"/>
+                    <hc:SimpleText VerticalAlignment="Center" x:Name="nameLabel" Text="Star-tears" Margin="5 0 0 0" Foreground="{DynamicResource TextPrimaryColor}"/>
                 </StackPanel>
                 <!--#endregion-->
                 <!--#region 电话号码-->
                 <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Label Content="电话:" Margin="3 0 0 0" Foreground="{DynamicResource TextPrimaryColor}"/>
-                    <Label x:Name="phoneLabel" Content="123456" Foreground="{DynamicResource TextPrimaryColor}"/>
+                    <hc:SimpleText  Text="电话:" VerticalAlignment="Center" Margin="5 0 0 0" Foreground="{DynamicResource TextPrimaryColor}"/>
+                    <hc:SimpleText VerticalAlignment="Center" x:Name="phoneLabel" Text ="123456" Margin="5 0 0 0" Foreground="{DynamicResource TextPrimaryColor}"/>
                 </StackPanel>
                 <!--#endregion-->
                 <!--#region 邮箱-->
                 <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Label Content="邮箱:" Margin="3 0 0 0" Foreground="{DynamicResource TextPrimaryColor}"/>
-                    <Label x:Name="emailLabel" Content="nicai@qq.com" Foreground="{DynamicResource TextPrimaryColor}"/>
+                    <hc:SimpleText  Text="邮箱:" VerticalAlignment="Center" Margin="5 0 0 0" Foreground="{DynamicResource TextPrimaryColor}"/>
+                    <hc:SimpleText VerticalAlignment="Center" x:Name="emailLabel" Text ="nicai@qq.com" Margin="5 0 0 0" Foreground="{DynamicResource TextPrimaryColor}"/>
                 </StackPanel>
                 <!--#endregion-->
             </Grid>

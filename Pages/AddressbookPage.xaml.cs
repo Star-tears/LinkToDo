@@ -65,9 +65,10 @@ namespace LinkToDo.Pages
             Storyboard storyboard = new Storyboard();
             DoubleAnimation doubleAnimation = new DoubleAnimation()
             {
-                From = 0,
+                From = 0.4,
                 To = 1,
-                Duration = TimeSpan.FromSeconds(1)
+                Duration = TimeSpan.FromSeconds(0.6),
+                DecelerationRatio = 0.6
             };
             DoubleAnimation doubleAnimation2 = new DoubleAnimation()
             {
@@ -102,14 +103,20 @@ namespace LinkToDo.Pages
             UserDataControl userDataControl = new UserDataControl();
             Dispatcher.BeginInvoke(new Action(async delegate
             {
+                List<AddressUnit> li=new List<AddressUnit>();
                 foreach (AddressUnit addressUnit in wrapPanel.Children)
                 {
                     if (addressUnit.IsChecked)
                     {
                         userDataControl.deleteUserInfo(addressUnit.userInfo);
+                        li.Add(addressUnit);
                     }
                 }
-                await Task.Run(Refresh);
+                foreach(AddressUnit addressUnit1 in li)
+                {
+                    wrapPanel.Children.Remove(addressUnit1);
+                }
+                //await Task.Run(Refresh);
             }));
         }
 

@@ -11,6 +11,9 @@
                 <ResourceDictionary Source="Assets/Icons/Icons.xaml"/>
 
                 <ResourceDictionary Source="Styles/MainStyle.xaml"/>
+
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

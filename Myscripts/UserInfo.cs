@@ -13,7 +13,7 @@ namespace LinkToDo.Myscripts
     public class UserInfo
     {
         private readonly string IMG_PATH_PREFIX = "https://src.star-tears.cn/hznu/class-img-bed/";
-        public string UUID;
+        public string UUID { get; set; }
         public string Name { get; set; }
         public string PhoneNum { get; set; }
         public string Email { get; set; }

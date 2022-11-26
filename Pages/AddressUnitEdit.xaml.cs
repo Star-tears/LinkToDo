@@ -140,9 +140,10 @@ namespace LinkToDo.Pages
             Storyboard storyboard = new Storyboard();
             DoubleAnimation doubleAnimation = new DoubleAnimation()
             {
-                From = 0,
+                From = 0.4,
                 To = 1,
-                Duration = TimeSpan.FromSeconds(1)
+                Duration = TimeSpan.FromSeconds(0.6),
+                DecelerationRatio = 0.6
             };
             DoubleAnimation doubleAnimation2 = new DoubleAnimation()
             {
