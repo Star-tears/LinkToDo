@@ -1,5 +1,10 @@
-﻿using System;
+﻿using HandyControl.Controls;
+using LinkToDo.Components;
+using LinkToDo.Myscripts;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,10 +28,54 @@ namespace LinkToDo.Pages
     /// </summary>
     public partial class TodolistPage : Page
     {
-        bool isShowMore { get; set; } = true;
+        private TodoDataControl todoDataControl;
+        private List<TodoInfo> todoUnitList1, todoUnitList2;
+        private bool isShowMore { get; set; } = true;
         public TodolistPage()
         {
             InitializeComponent();
+            Init();
+
+        }
+        private void Init()
+        {
+            Refresh();
+        }
+        private async void Refresh()
+        {
+            await Task.Run(() =>
+            {
+                todoDataControl = new TodoDataControl();
+                todoUnitList1 = new List<TodoInfo>();
+                todoUnitList2 = new List<TodoInfo>();
+                DataTable dt = todoDataControl.queryUserInfo();
+                foreach (DataRow row in dt.Rows)
+                {
+                    TodoInfo tmp_todoInfo = new TodoInfo((string)row[0], (string)row[1], (DateTime)row[2], (int)row[3], (int)row[4], (string)row[5]);
+                    if (tmp_todoInfo.IsDone == 0)
+                    {
+                        todoUnitList1.Add(tmp_todoInfo);
+                    }
+                    else
+                    {
+                        todoUnitList2.Add(tmp_todoInfo);
+                    }
+                }
+                Dispatcher.BeginInvoke(new Action(delegate
+                {
+                    todoList1.Children.Clear();
+                    foreach (TodoInfo sub_todoInfo in todoUnitList1)
+                    {
+                        todoList1.Children.Add(new TodoUnit(this,sub_todoInfo));
+                    }
+                    todoList2.Children.Clear();
+                    foreach (TodoInfo sub_todoInfo in todoUnitList2)
+                    {
+                        todoList2.Children.Add(new TodoUnit(this,sub_todoInfo));
+                    }
+                }));
+
+            });
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -82,7 +131,7 @@ namespace LinkToDo.Pages
 
         private void todoTaskContentTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(todoTaskContentTextBox.Text.Length > 0)
+            if (todoTaskContentTextBox.Text.Length > 0)
             {
                 spFuncArea.Visibility = Visibility.Visible;
             }
@@ -99,7 +148,7 @@ namespace LinkToDo.Pages
         private void todoTaskContentTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             //Console.WriteLine("focus");
-            
+
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -109,17 +158,35 @@ namespace LinkToDo.Pages
             g0Focus1.Visibility = Visibility.Visible;
             g1Focus0.Visibility = Visibility.Collapsed;
             g1Focus1.Visibility = Visibility.Visible;
+            dateTimePickers.SelectedDateTime = DateTime.Now.AddDays(7);
             todoTaskContentTextBox.Focus();
         }
 
         private void todoTaskContentTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            //Console.WriteLine("lost_focus");
-            todoTaskContentTextBox.Text= null;
+            Console.WriteLine("lost_focus");
+            todoTaskContentTextBox.Text = null;
             g0Focus0.Visibility = Visibility.Visible;
             g0Focus1.Visibility = Visibility.Collapsed;
             g1Focus0.Visibility = Visibility.Visible;
             g1Focus1.Visibility = Visibility.Collapsed;
+        }
+
+        private void todoTaskContentTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (todoTaskContentTextBox.Text.Length > 0)
+                {
+                    TodoInfo tmp_todoInfo = new TodoInfo(MyUtils.genUUID(), todoTaskContentTextBox.Text, dateTimePickers.SelectedDateTime.Value, 0, 0, teammateList.Text);
+                    todoDataControl.insertUserInfo(tmp_todoInfo);
+                    todoTaskContentTextBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                }
+                else
+                {
+                    Growl.Info("未输入任务内容");
+                }
+            }
         }
     }
 }

@@ -20,11 +20,10 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <StackPanel x:Name="todoList1" Grid.Row="0" Orientation="Vertical" VerticalAlignment="Top">
+                    <StackPanel Grid.Row="0" Orientation="Vertical" VerticalAlignment="Top">
                         <Border Height="64"/>
-                        <local1:TodoUnit/>
-                        <local1:TodoUnit/>
-                        <local1:TodoUnit/>
+                        <StackPanel x:Name="todoList1" Orientation="Vertical" VerticalAlignment="Top">
+                        </StackPanel>
                     </StackPanel>
                     <Button x:Name="moreBtn" Grid.Row="1" HorizontalAlignment="Left" Margin="0 10 0 10" Click="moreBtn_Click">
                         <Button.Background>
@@ -38,21 +37,13 @@
                                     </Path.RenderTransform>
                                 </Path>
                                 <hc:SimpleText Text="已完成" Foreground="{DynamicResource TextPrimaryBlueColorA}"/>
-                                <hc:SimpleText Text="0" Foreground="{DynamicResource TextPrimaryBlueColorA}" Margin="12 0 0 0"/>
+                                <hc:SimpleText  Foreground="{DynamicResource TextPrimaryBlueColorA}" Margin="12 0 0 0" Text="0"/>
                             </StackPanel>
 
                         </Button.Content>
                     </Button>
                     <StackPanel x:Name="todoList2" Grid.Row="2" Orientation="Vertical" VerticalAlignment="Top">
-                        <local1:TodoUnit/>
-                        <local1:TodoUnit/>
-                        <local1:TodoUnit/>
-                        <local1:TodoUnit/>
-                        <local1:TodoUnit/>
-                        <local1:TodoUnit/>
-                        <local1:TodoUnit/>
-                        <local1:TodoUnit/>
-                        <local1:TodoUnit/>
+                        
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
@@ -95,10 +86,10 @@
                         </Grid>
                         <Grid x:Name="g1Focus1" Grid.Column="1" VerticalAlignment="Center" Visibility="Collapsed">
                             <StackPanel Orientation="Vertical">
-                                <hc:TextBox x:Name="todoTaskContentTextBox" hc:InfoElement.Placeholder="请输入任务内容" TextChanged="todoTaskContentTextBox_TextChanged" Background="Transparent" Margin="0 0 8 0" GotFocus="todoTaskContentTextBox_GotFocus" LostFocus="todoTaskContentTextBox_LostFocus"/>
+                                <hc:TextBox x:Name="todoTaskContentTextBox" hc:InfoElement.Placeholder="请输入任务内容" TextChanged="todoTaskContentTextBox_TextChanged" Background="Transparent" Margin="0 0 8 0" GotFocus="todoTaskContentTextBox_GotFocus" LostFocus="todoTaskContentTextBox_LostFocus" KeyDown="todoTaskContentTextBox_KeyDown"/>
                                 <StackPanel Orientation="Horizontal" Margin="0 8 0 0">
                                     <hc:SimpleText Text="已选关联人:" Width="70"/>
-                                    <hc:SimpleText Text="无"/>
+                                    <hc:SimpleText x:Name="teammateList" Text="无"/>
                                 </StackPanel>
                             </StackPanel>
                             
@@ -107,7 +98,7 @@
                             <hc:Divider Orientation="Vertical" Width="10" Height="60"/>
                             <StackPanel x:Name="functionalArea" Grid.Column="2" VerticalAlignment="Center" Width="Auto" Orientation="Vertical">
                             <Button Style="{StaticResource ButtonPrimary}" Content="添加关联人" Width="200"/>
-                                <hc:DateTimePicker Style="{StaticResource DateTimePickerExtend}" hc:InfoElement.Title="提醒日期:" hc:InfoElement.TitlePlacement="Left" Margin="0 4 0 0"/>
+                                <hc:DateTimePicker x:Name="dateTimePickers" Style="{StaticResource DateTimePickerExtend}" hc:InfoElement.Title="提醒日期:" hc:InfoElement.TitlePlacement="Left" Margin="0 4 0 0"/>
                             </StackPanel>
                         </StackPanel>
                         

@@ -23,11 +23,11 @@ namespace LinkToDo.Myscripts
             int res = mysqlBase.commonExecute(sql);
             if (res > 0)
             {
-                Growl.Success("数据添加成功！");
+                Growl.Success("云端数据添加成功！");
             }
             else
             {
-                Growl.Warning("数据添加失败！");
+                Growl.Warning("云端数据添加失败！");
             }
         }
         public void updateUserInfo(UserInfo userInfo)
@@ -36,11 +36,11 @@ namespace LinkToDo.Myscripts
             int res = mysqlBase.commonExecute(sql);
             if (res > 0)
             {
-                Growl.Success("数据更新成功！");
+                Growl.Success("云端数据更新成功！");
             }
             else
             {
-                Growl.Warning("数据更新失败！");
+                Growl.Warning("云端数据更新失败！");
             }
         }
         public void deleteUserInfo(UserInfo userInfo)
@@ -49,11 +49,11 @@ namespace LinkToDo.Myscripts
             int res = mysqlBase.commonExecute(sql);
             if (res > 0)
             {
-                Growl.Success("数据删除成功！");
+                Growl.Success("云端数据删除成功！");
             }
             else
             {
-                Growl.Warning("数据删除失败！");
+                Growl.Warning("云端数据删除失败！");
             }
         }
         public DataTable queryUserInfo()
@@ -63,9 +63,7 @@ namespace LinkToDo.Myscripts
             DataTable dt = ds.Tables[0];
             if (dt.Rows.Count != 0)
             {
-                Growl.Info("数据拉取成功");
-                string uuid = (string)dt.Rows[0][0];
-                string name = (string)dt.Rows[0][1];
+                Growl.Success("云端数据拉取成功");
                 return dt;
             }
             else

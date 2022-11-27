@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace LinkToDo.Myscripts
 {
-    internal class TodoInfo
+    public class TodoInfo : IComparable<TodoInfo>
     {
         public string UUID { get; set; }    
         public string Content { get; set; }
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
         public int Priority { get; set; }
         public int IsDone { get; set; }
         public string Teammate { get; set; }
-        public TodoInfo(string uUID,string content,string date,int priority,int isDone,string teammate)
+        public TodoInfo(string uUID,string content, DateTime date,int priority,int isDone,string teammate)
         {
             UUID = uUID;
             Content= content;
@@ -24,5 +24,13 @@ namespace LinkToDo.Myscripts
             Teammate = teammate;
         }
 
+        public int CompareTo(TodoInfo other)
+        {
+            if (Priority!=other.Priority)
+            {
+                return Priority.CompareTo(other.Priority);
+            }
+            return Date.CompareTo(other.Date);
+        }
     }
 }

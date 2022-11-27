@@ -7,7 +7,7 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border Height="60" CornerRadius="10" Background="{StaticResource PrimaryBackgroundColor}" Margin="0 1.6 0 1.6" Opacity="0.85" Loaded="Border_Loaded" RenderTransformOrigin="0.5,0.5">
+    <Border x:Name="mainBorder" Height="60" CornerRadius="10" Background="{StaticResource PrimaryBackgroundColor}" Margin="0 1.6 0 1.6" Opacity="0.85" Loaded="Border_Loaded" RenderTransformOrigin="0.5,0.5" MouseEnter="mainBorder_MouseEnter" MouseLeave="mainBorder_MouseLeave">
         <Border.RenderTransform>
             <TranslateTransform X="0" Y="0"/>
         </Border.RenderTransform>
@@ -17,7 +17,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
-            <ToggleButton x:Name="doneCircle" Grid.Column="0" BorderThickness="0" IsChecked="False" Style="{StaticResource ToggleButtonFlip}" Width="24" Height="24">
+            <ToggleButton x:Name="isDoneBtn" Grid.Column="0" BorderThickness="0" IsChecked="False" Style="{StaticResource ToggleButtonFlip}" Width="24" Height="24" Click="isDoneBtn_Click" Checked="isDoneBtn_Checked" Unchecked="isDoneBtn_Unchecked">
                 <hc:StatusSwitchElement.CheckedElement>
                     <Border Background="{DynamicResource PrimaryBrush}">
                         <Path Data="{DynamicResource checked}" Stretch="Fill" Fill="{DynamicResource BackgroundBrush}" Width="12" Height="12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -36,21 +36,25 @@
                     <RowDefinition Height="1.7*"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <hc:SimpleText Grid.Row="0" Text="todo" VerticalAlignment="Bottom" FontSize="16"/>
+                <hc:TextBox x:Name="todoContentText" Grid.Row="0" Text="todo" Foreground="{DynamicResource TextPrimaryColor}" VerticalAlignment="Bottom" FontSize="16" BorderBrush="Transparent" Background="Transparent" IsReadOnly="True"/>
                 <Grid Grid.Row="1" Opacity="0.8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <hc:SimpleText Grid.Column="0" Text="2022.11.25" VerticalAlignment="Center" FontSize="10"/>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Path x:Name="calenderIcon" Data="{DynamicResource calender}" Stretch="Fill" Height="10" Width="10" Fill="{DynamicResource DangerBrush}" Margin="0 0 4 0"/>
+                        <hc:SimpleText x:Name="todoDateTimeText" Text="2022.11.25" VerticalAlignment="Center" FontSize="10" Foreground="{DynamicResource DangerBrush}"/>
+                    </StackPanel>
+                    
                     <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="16 0 0 0">
-                        <hc:SimpleText Text="关联人:" VerticalAlignment="Center"  FontSize="10" Width="40"/>
-                        <hc:SimpleText Text="无" VerticalAlignment="Center" FontSize="10"/>
+                        <hc:SimpleText x:Name="todoTeammateListTextTitle" Text="关联人:" VerticalAlignment="Center"  FontSize="10" Width="40"/>
+                        <hc:SimpleText x:Name="todoTeammateListText" Text="无" VerticalAlignment="Center" FontSize="10"/>
                     </StackPanel>
                 </Grid>
             </Grid>
             <hc:SimplePanel Grid.Column="2">
-                <ToggleButton x:Name="isImportantBtn" Grid.Column="0" BorderThickness="0" IsChecked="False" Style="{StaticResource ToggleButtonFlip}" Width="24" Height="24" Background="Transparent">
+                <ToggleButton x:Name="isImportantBtn" Grid.Column="0" BorderThickness="0" IsChecked="False" Style="{StaticResource ToggleButtonFlip}" Width="24" Height="24" Background="Transparent" Click="isImportantBtn_Click">
                     <hc:StatusSwitchElement.CheckedElement>
                         <Border>
                             <Path Data="{DynamicResource starfilled}" Stretch="Fill" Fill="{DynamicResource PrimaryBrush}" Width="20" Height="20" HorizontalAlignment="Center"/>

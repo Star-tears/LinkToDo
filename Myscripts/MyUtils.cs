@@ -15,5 +15,12 @@ namespace LinkToDo.Myscripts
             x = y;
             y = temp;
         }
+        public static string genUUID()
+        {
+            Guid myUUId = Guid.NewGuid();
+            string convertedUUID = myUUId.ToString();
+            Console.WriteLine("Current UUID is: " + convertedUUID);
+            return convertedUUID;
+        }
     }
 }
