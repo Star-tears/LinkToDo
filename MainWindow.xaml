@@ -110,8 +110,8 @@
                 </Border>
 
                 <Border Grid.Row="1" Grid.ZIndex="10" HorizontalAlignment="Right" VerticalAlignment="Top" Width="Auto" Height="Auto">
-                    <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right" Height="Auto">
-                        <StackPanel hc:Growl.GrowlParent="True" VerticalAlignment="Top" Margin="0,10,10,10" Height="Auto"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right" Height="150">
+                        <StackPanel hc:Growl.GrowlParent="True" VerticalAlignment="Top" Margin="0,4,8,4" Height="Auto"/>
                     </ScrollViewer>
                 </Border>
             </Grid>

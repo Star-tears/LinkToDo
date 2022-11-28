@@ -84,9 +84,8 @@ namespace LinkToDo.Pages
                     {
                         todoList2.Children.Add(new TodoUnit(this, sub_todoInfo));
                     }
-
+                    Refresh_TodoDoneCount();
                 }));
-                Refresh_TodoDoneCount();
             });
         }
         public void UpdateTodoInfo(TodoInfo todoInfo)
@@ -96,6 +95,7 @@ namespace LinkToDo.Pages
                 TodoDataControl tmp_todoDataControl = new TodoDataControl();
                 tmp_todoDataControl.updateTodoInfo(todoInfo);
                 Refresh_TodoDoneCount();
+                
             });
         }
         public void DeleteTodoInfo(TodoInfo todoInfo)
@@ -180,12 +180,16 @@ namespace LinkToDo.Pages
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Console.WriteLine("border: " + "mouse_down");
-            g0Focus0.Visibility = Visibility.Collapsed;
-            g0Focus1.Visibility = Visibility.Visible;
-            g1Focus0.Visibility = Visibility.Collapsed;
-            g1Focus1.Visibility = Visibility.Visible;
-            dateTimePickers.SelectedDateTime = DateTime.Now.AddDays(7);
-            todoTaskContentTextBox.Focus();
+            if (g0Focus0.Visibility == Visibility.Visible)
+            {
+                g0Focus0.Visibility = Visibility.Collapsed;
+                g0Focus1.Visibility = Visibility.Visible;
+                g1Focus0.Visibility = Visibility.Collapsed;
+                g1Focus1.Visibility = Visibility.Visible;
+                dateTimePickers.SelectedDateTime = DateTime.Now.AddDays(7);
+                todoTaskContentTextBox.Focus();
+            }
+
         }
 
         private void todoTaskContentTextBox_LostFocus(object sender, RoutedEventArgs e)
@@ -215,9 +219,19 @@ namespace LinkToDo.Pages
                     TodoInfo tmp_todoInfo = new TodoInfo(MyUtils.genUUID(), todoTaskContentTextBox.Text, dateTimePickers.SelectedDateTime.Value, 0, 0, teammateList.Text);
                     Task.Run(() =>
                    {
+                       todoDataControl = new TodoDataControl();
                        todoDataControl.insertTodoInfo(tmp_todoInfo);
                    });
-                    todoTaskContentTextBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                    Task.Run(() =>
+                    {
+                        Dispatcher.BeginInvoke(new Action(delegate
+                        {
+                            TodoUnit todoUnit = new TodoUnit(this, tmp_todoInfo);
+                            todoUnit.addTodoUnitIntoTodoList();
+                        }));
+
+                    });
+                    todoTaskContentTextBox_LostFocus();
                 }
                 else
                 {

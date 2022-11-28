@@ -72,13 +72,13 @@ namespace LinkToDo.Components
             {
                 From = 0,
                 To = 1,
-                Duration = TimeSpan.FromSeconds(1)
+                Duration = TimeSpan.FromSeconds(0.6)
             };
             DoubleAnimation doubleAnimation2 = new DoubleAnimation()
             {
                 From = 200,
                 To = 0,
-                Duration = TimeSpan.FromSeconds(1),
+                Duration = TimeSpan.FromSeconds(0.6),
                 DecelerationRatio = 1
             };
             Storyboard.SetTarget(doubleAnimation, mainBorder);
@@ -176,7 +176,7 @@ namespace LinkToDo.Components
             });
 
         }
-        private void addTodoUnitIntoTodoList()
+        public void addTodoUnitIntoTodoList()
         {
             if (isDoneBtn.IsChecked == true)
             {

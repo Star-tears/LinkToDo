@@ -56,7 +56,7 @@ namespace LinkToDo.Myscripts
         }
         public DataTable queryTodoInfo()
         {
-            string sql = "SELECT * FROM todoinfo ORDER BY priority DESC,date DESC";
+            string sql = "SELECT * FROM todoinfo ORDER BY priority DESC,date";
             DataSet ds = mysqlBase.GetDataSet(sql, "todoinfo");
             DataTable dt = ds.Tables[0];
             if (dt.Rows.Count != 0)

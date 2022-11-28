@@ -30,7 +30,7 @@ namespace LinkToDo.Myscripts
             {
                 return Priority.CompareTo(other.Priority);
             }
-            return Date.CompareTo(other.Date);
+            return other.Date.CompareTo(Date);
         }
     }
 }
