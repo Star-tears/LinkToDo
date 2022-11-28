@@ -249,5 +249,29 @@ namespace LinkToDo.Components
         {
             mainBorder.Background = (SolidColorBrush)this.FindResource("PrimaryBackgroundColor");
         }
+
+        private void deleteMI_Click(object sender, RoutedEventArgs e)
+        {
+            todolistPage.DeleteTodoInfo(todoInfo);
+            Task.Run(() =>
+            {
+                Dispatcher.BeginInvoke(new Action(delegate
+                {
+
+                    if (isDoneBtn.IsChecked == true)
+                    {
+                        todolistPage.todoList2.Children.Remove(this);
+                    }
+                    else if (isImportantBtn.IsChecked == true)
+                    {
+                        todolistPage.todoList0.Children.Remove(this);
+                    }
+                    else
+                    {
+                        todolistPage.todoList1.Children.Remove(this);
+                    }
+                }));
+            });
+        }
     }
 }

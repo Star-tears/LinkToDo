@@ -7,6 +7,11 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Name="deleteMI" Header="删除" Click="deleteMI_Click"/>
+        </ContextMenu>
+    </UserControl.ContextMenu>
     <Border x:Name="mainBorder" Height="60" CornerRadius="10" Background="{StaticResource PrimaryBackgroundColor}" Margin="0 1.6 0 1.6" Opacity="0.85" Loaded="Border_Loaded" RenderTransformOrigin="0.5,0.5" MouseEnter="mainBorder_MouseEnter" MouseLeave="mainBorder_MouseLeave">
         <Border.RenderTransform>
             <TranslateTransform X="0" Y="0"/>
@@ -36,7 +41,7 @@
                     <RowDefinition Height="1.7*"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <hc:TextBox x:Name="todoContentText" Grid.Row="0" Text="todo" Foreground="{DynamicResource TextPrimaryColor}" VerticalAlignment="Bottom" FontSize="16" BorderBrush="Transparent" Background="Transparent" IsReadOnly="True"/>
+                <hc:TextBox x:Name="todoContentText" Grid.Row="0" Width="Auto" Text="todo" Foreground="{DynamicResource TextPrimaryColor}" VerticalAlignment="Bottom" FontSize="16" BorderBrush="Transparent" Background="Transparent" IsReadOnly="True"/>
                 <Grid Grid.Row="1" Opacity="0.8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>

@@ -39,7 +39,7 @@
                                     </Path.RenderTransform>
                                 </Path>
                                 <hc:SimpleText Text="已完成" Foreground="{DynamicResource TextPrimaryBlueColorA}"/>
-                                <hc:SimpleText  Foreground="{DynamicResource TextPrimaryBlueColorA}" Margin="12 0 0 0" Text="0"/>
+                                <hc:SimpleText x:Name="todoDoneCount" Foreground="{DynamicResource TextPrimaryBlueColorA}" Margin="12 0 0 0" Text="0"/>
                             </StackPanel>
 
                         </Button.Content>

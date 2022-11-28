@@ -84,16 +84,27 @@ namespace LinkToDo.Pages
                     {
                         todoList2.Children.Add(new TodoUnit(this, sub_todoInfo));
                     }
-                }));
 
+                }));
+                Refresh_TodoDoneCount();
             });
         }
         public void UpdateTodoInfo(TodoInfo todoInfo)
         {
             Task.Run(() =>
             {
-                TodoDataControl tmp_todoDataControl=new TodoDataControl();
+                TodoDataControl tmp_todoDataControl = new TodoDataControl();
                 tmp_todoDataControl.updateTodoInfo(todoInfo);
+                Refresh_TodoDoneCount();
+            });
+        }
+        public void DeleteTodoInfo(TodoInfo todoInfo)
+        {
+            Task.Run(() =>
+            {
+                TodoDataControl tmp_todoDataControl = new TodoDataControl();
+                tmp_todoDataControl.deleteTodoInfo(todoInfo);
+                Refresh_TodoDoneCount();
             });
         }
 
@@ -223,6 +234,14 @@ namespace LinkToDo.Pages
         private void todolistPanelScr_MouseDown(object sender, MouseButtonEventArgs e)
         {
             todoTaskContentTextBox_LostFocus();
+        }
+
+        private void Refresh_TodoDoneCount()
+        {
+            Dispatcher.BeginInvoke(new Action(delegate
+            {
+                todoDoneCount.Text = todoList2.Children.Count.ToString();
+            }));
         }
     }
 }
