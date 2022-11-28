@@ -15,7 +15,7 @@ namespace LinkToDo.Myscripts
         {
             mysqlBase = new MysqlBase();
         }
-        public void insertUserInfo(TodoInfo todoInfo)
+        public void insertTodoInfo(TodoInfo todoInfo)
         {
             string sql = "INSERT INTO todoinfo (uuid,content,date,priority,isdone,teammate) VALUES ('" + todoInfo.UUID + "','" + todoInfo.Content + "','" + todoInfo.Date + "','" + todoInfo.Priority + "','" + todoInfo.IsDone +"','"+todoInfo.Teammate+ "')";
             int res = mysqlBase.commonExecute(sql);
@@ -28,7 +28,7 @@ namespace LinkToDo.Myscripts
                 Growl.Warning("云端数据添加失败！");
             }
         }
-        public void updateUserInfo(TodoInfo todoInfo)
+        public void updateTodoInfo(TodoInfo todoInfo)
         {
             string sql = "UPDATE todoinfo SET content='" + todoInfo.Content + "',date='" + todoInfo.Date.ToString("yyyy-MM-dd HH:mm:ss") + "',priority='" + todoInfo.Priority + "',isdone='" + todoInfo.IsDone +"',teammate='"+ todoInfo.Teammate + "' where uuid='" + todoInfo.UUID + "'";
             int res = mysqlBase.commonExecute(sql);
@@ -41,7 +41,7 @@ namespace LinkToDo.Myscripts
                 Growl.Warning("云端数据更新失败！");
             }
         }
-        public void deleteUserInfo(TodoInfo todoInfo)
+        public void deleteTodoInfo(TodoInfo todoInfo)
         {
             string sql = "DELETE FROM todoinfo WHERE uuid='" + todoInfo.UUID + "'";
             int res = mysqlBase.commonExecute(sql);
@@ -54,7 +54,7 @@ namespace LinkToDo.Myscripts
                 Growl.Warning("云端数据删除失败！");
             }
         }
-        public DataTable queryUserInfo()
+        public DataTable queryTodoInfo()
         {
             string sql = "SELECT * FROM todoinfo ORDER BY priority DESC,date DESC";
             DataSet ds = mysqlBase.GetDataSet(sql, "todoinfo");

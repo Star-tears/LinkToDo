@@ -89,7 +89,7 @@ namespace LinkToDo.Pages
         private void insertpersonBtn_Click(object sender, RoutedEventArgs e)
         {
             UserInfo userInfo = new UserInfo(UserInfo.genUUID(), "", "", "", "default.jpg");
-            AddressUnitEdit addressUnitEdit = new AddressUnitEdit(this,userInfo);
+            AddressUnitEdit addressUnitEdit = new AddressUnitEdit(this, userInfo);
             NavigationService.GetNavigationService(this).Navigate(addressUnitEdit);
         }
 
@@ -101,23 +101,27 @@ namespace LinkToDo.Pages
         private void deletepersonBtn_Click(object sender, RoutedEventArgs e)
         {
             UserDataControl userDataControl = new UserDataControl();
-            Dispatcher.BeginInvoke(new Action(async delegate
+            Task.Run(() =>
             {
-                List<AddressUnit> li=new List<AddressUnit>();
-                foreach (AddressUnit addressUnit in wrapPanel.Children)
+                Dispatcher.BeginInvoke(new Action(delegate
                 {
-                    if (addressUnit.IsChecked)
+                    List<AddressUnit> li = new List<AddressUnit>();
+                    foreach (AddressUnit addressUnit in wrapPanel.Children)
                     {
-                        userDataControl.deleteUserInfo(addressUnit.userInfo);
-                        li.Add(addressUnit);
+                        if (addressUnit.IsChecked)
+                        {
+                            userDataControl.deleteUserInfo(addressUnit.userInfo);
+                            li.Add(addressUnit);
+                        }
                     }
-                }
-                foreach(AddressUnit addressUnit1 in li)
-                {
-                    wrapPanel.Children.Remove(addressUnit1);
-                }
-                //await Task.Run(Refresh);
-            }));
+                    foreach (AddressUnit addressUnit1 in li)
+                    {
+                        wrapPanel.Children.Remove(addressUnit1);
+                    }
+                    //await Task.Run(Refresh);
+                }));
+            });
+
         }
 
         private void updatepersonBtn_Click(object sender, RoutedEventArgs e)
@@ -126,7 +130,7 @@ namespace LinkToDo.Pages
             {
                 if (addressUnit.IsChecked)
                 {
-                    AddressUnitEdit addressUnitEdit = new AddressUnitEdit(this,addressUnit.userInfo, 1);
+                    AddressUnitEdit addressUnitEdit = new AddressUnitEdit(this, addressUnit.userInfo, 1);
                     NavigationService.GetNavigationService(this).Navigate(addressUnitEdit);
                     break;
                 }

@@ -29,7 +29,7 @@ namespace LinkToDo.Pages
     public partial class TodolistPage : Page
     {
         private TodoDataControl todoDataControl;
-        private List<TodoInfo> todoUnitList1, todoUnitList2;
+
         private bool isShowMore { get; set; } = true;
         public TodolistPage()
         {
@@ -41,18 +41,24 @@ namespace LinkToDo.Pages
         {
             Refresh();
         }
-        private async void Refresh()
+        private void Refresh()
         {
-            await Task.Run(() =>
+            Task.Run(() =>
             {
                 todoDataControl = new TodoDataControl();
+                List<TodoInfo> todoUnitList0, todoUnitList1, todoUnitList2;
+                todoUnitList0 = new List<TodoInfo>();
                 todoUnitList1 = new List<TodoInfo>();
                 todoUnitList2 = new List<TodoInfo>();
-                DataTable dt = todoDataControl.queryUserInfo();
+                DataTable dt = todoDataControl.queryTodoInfo();
                 foreach (DataRow row in dt.Rows)
                 {
                     TodoInfo tmp_todoInfo = new TodoInfo((string)row[0], (string)row[1], (DateTime)row[2], (int)row[3], (int)row[4], (string)row[5]);
-                    if (tmp_todoInfo.IsDone == 0)
+                    if (tmp_todoInfo.IsDone == 0 && tmp_todoInfo.Priority > 0)
+                    {
+                        todoUnitList0.Add(tmp_todoInfo);
+                    }
+                    else if (tmp_todoInfo.IsDone == 0)
                     {
                         todoUnitList1.Add(tmp_todoInfo);
                     }
@@ -63,18 +69,31 @@ namespace LinkToDo.Pages
                 }
                 Dispatcher.BeginInvoke(new Action(delegate
                 {
+                    todoList0.Children.Clear();
+                    foreach (TodoInfo sub_todoInfo in todoUnitList0)
+                    {
+                        todoList0.Children.Add(new TodoUnit(this, sub_todoInfo));
+                    }
                     todoList1.Children.Clear();
                     foreach (TodoInfo sub_todoInfo in todoUnitList1)
                     {
-                        todoList1.Children.Add(new TodoUnit(this,sub_todoInfo));
+                        todoList1.Children.Add(new TodoUnit(this, sub_todoInfo));
                     }
                     todoList2.Children.Clear();
                     foreach (TodoInfo sub_todoInfo in todoUnitList2)
                     {
-                        todoList2.Children.Add(new TodoUnit(this,sub_todoInfo));
+                        todoList2.Children.Add(new TodoUnit(this, sub_todoInfo));
                     }
                 }));
 
+            });
+        }
+        public void UpdateTodoInfo(TodoInfo todoInfo)
+        {
+            Task.Run(() =>
+            {
+                TodoDataControl tmp_todoDataControl=new TodoDataControl();
+                tmp_todoDataControl.updateTodoInfo(todoInfo);
             });
         }
 
@@ -141,19 +160,15 @@ namespace LinkToDo.Pages
             }
         }
 
-        private void Border_GotFocus(object sender, RoutedEventArgs e)
-        {
-        }
-
         private void todoTaskContentTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            //Console.WriteLine("focus");
+            Console.WriteLine("todoTaskContentTextBox: " + "focus");
 
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //Console.WriteLine("mouse_down");
+            Console.WriteLine("border: " + "mouse_down");
             g0Focus0.Visibility = Visibility.Collapsed;
             g0Focus1.Visibility = Visibility.Visible;
             g1Focus0.Visibility = Visibility.Collapsed;
@@ -164,7 +179,15 @@ namespace LinkToDo.Pages
 
         private void todoTaskContentTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("lost_focus");
+            Console.WriteLine("todoTaskContentTextBox: " + "lost_focus");
+            //todoTaskContentTextBox.Text = null;
+            //g0Focus0.Visibility = Visibility.Visible;
+            //g0Focus1.Visibility = Visibility.Collapsed;
+            //g1Focus0.Visibility = Visibility.Visible;
+            //g1Focus1.Visibility = Visibility.Collapsed;
+        }
+        private void todoTaskContentTextBox_LostFocus()
+        {
             todoTaskContentTextBox.Text = null;
             g0Focus0.Visibility = Visibility.Visible;
             g0Focus1.Visibility = Visibility.Collapsed;
@@ -179,7 +202,10 @@ namespace LinkToDo.Pages
                 if (todoTaskContentTextBox.Text.Length > 0)
                 {
                     TodoInfo tmp_todoInfo = new TodoInfo(MyUtils.genUUID(), todoTaskContentTextBox.Text, dateTimePickers.SelectedDateTime.Value, 0, 0, teammateList.Text);
-                    todoDataControl.insertUserInfo(tmp_todoInfo);
+                    Task.Run(() =>
+                   {
+                       todoDataControl.insertTodoInfo(tmp_todoInfo);
+                   });
                     todoTaskContentTextBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
                 }
                 else
@@ -187,6 +213,16 @@ namespace LinkToDo.Pages
                     Growl.Info("未输入任务内容");
                 }
             }
+        }
+
+
+        private void Page_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+        }
+
+        private void todolistPanelScr_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            todoTaskContentTextBox_LostFocus();
         }
     }
 }

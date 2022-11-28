@@ -81,10 +81,10 @@ namespace LinkToDo.Components
                 Duration = TimeSpan.FromSeconds(1),
                 DecelerationRatio = 1
             };
-            Storyboard.SetTarget(doubleAnimation, (Border)sender);
+            Storyboard.SetTarget(doubleAnimation, mainBorder);
             Storyboard.SetTargetProperty(doubleAnimation, new PropertyPath("Opacity"));
             storyboard.Children.Add(doubleAnimation);
-            Storyboard.SetTarget(doubleAnimation2, (Border)sender);
+            Storyboard.SetTarget(doubleAnimation2, mainBorder);
             Storyboard.SetTargetProperty(doubleAnimation2, new PropertyPath("RenderTransform.(TranslateTransform.X)"));
             storyboard.Children.Add(doubleAnimation2);
             storyboard.Begin();
@@ -100,65 +100,122 @@ namespace LinkToDo.Components
             starPath.Fill = (SolidColorBrush)this.FindResource("PrimaryGrayColor");
         }
 
-        private async void isDoneBtn_Click(object sender, RoutedEventArgs e)
+        private void isDoneBtn_Click(object sender, RoutedEventArgs e)
         {
-            await Task.Run(() =>
+            Console.WriteLine("isDoneBtn: " + isDoneBtn.IsChecked);
+            Storyboard storyboard = new Storyboard();
+            DoubleAnimation doubleAnimation = new DoubleAnimation()
+            {
+                From = 1,
+                To = 0,
+                Duration = TimeSpan.FromSeconds(0.8)
+            };
+            DoubleAnimation doubleAnimation2 = new DoubleAnimation()
+            {
+                From = 0,
+                To = 200,
+                Duration = TimeSpan.FromSeconds(0.8),
+                DecelerationRatio = 1
+            };
+            Storyboard.SetTarget(doubleAnimation, mainBorder);
+            Storyboard.SetTargetProperty(doubleAnimation, new PropertyPath("Opacity"));
+            storyboard.Children.Add(doubleAnimation);
+            Storyboard.SetTarget(doubleAnimation2, mainBorder);
+            Storyboard.SetTargetProperty(doubleAnimation2, new PropertyPath("RenderTransform.(TranslateTransform.X)"));
+            storyboard.Children.Add(doubleAnimation2);
+            storyboard.Begin();
+
+            todoInfo.IsDone = isDoneBtn.IsChecked == true ? 1 : 0;
+            todolistPage.UpdateTodoInfo(todoInfo);
+            Task.Run(() =>
             {
                 Dispatcher.BeginInvoke(new Action(delegate
                 {
-                    Console.WriteLine("isDoneBtn: " + isDoneBtn.IsChecked);
-                    if (isDoneBtn.IsChecked == true)
+
+                    if (isDoneBtn.IsChecked == false)
                     {
-                        todoInfo.IsDone = 1;
-                        todolistPage.todoList1.Children.Remove(this);
-                        todolistPage.todoList2.Children.Insert(0, this);
+                        todolistPage.todoList2.Children.Remove(this);
+                    }
+                    else if (isImportantBtn.IsChecked == true)
+                    {
+                        todolistPage.todoList0.Children.Remove(this);
                     }
                     else
                     {
-                        todoInfo.IsDone = 0;
-                        todolistPage.todoList2.Children.Remove(this);
-                        int pos = todolistPage.todoList1.Children.Count;
-                        for (int i = 0; i < todolistPage.todoList1.Children.Count; i++)
-                        {
-                            if (todoInfo.CompareTo(((TodoUnit)todolistPage.todoList1.Children[i]).todoInfo) >= 0)
-                            {
-                                pos = i;
-                                break;
-                            }
-                        }
-                        todolistPage.todoList1.Children.Insert(pos, this);
+                        todolistPage.todoList1.Children.Remove(this);
                     }
+                    addTodoUnitIntoTodoList();
                 }));
             });
 
         }
 
-        private async void isImportantBtn_Click(object sender, RoutedEventArgs e)
+        private void isImportantBtn_Click(object sender, RoutedEventArgs e)
         {
-            await Task.Run(() =>
+            todoInfo.Priority = isImportantBtn.IsChecked == true ? 5 : 0;
+            todolistPage.UpdateTodoInfo(todoInfo);
+            Task.Run(() =>
             {
                 Dispatcher.BeginInvoke(new Action(delegate
                 {
-                    Console.WriteLine("isImportantBtn: " + isImportantBtn.IsChecked);
-                    if (isDoneBtn.IsChecked == false)
+                    if (isDoneBtn.IsChecked == true)
                     {
-                        todoInfo.Priority = isImportantBtn.IsChecked==true ? 5 : 0;
-                        todolistPage.todoList1.Children.Remove(this);
-                        int pos = todolistPage.todoList1.Children.Count;
-                        for (int i = 0; i < todolistPage.todoList1.Children.Count; i++)
-                        {
-                            if (todoInfo.CompareTo(((TodoUnit)todolistPage.todoList1.Children[i]).todoInfo) >= 0)
-                            {
-                                pos = i;
-                                break;
-                            }
-                        }
-                        todolistPage.todoList1.Children.Insert(pos, this);
+                        todolistPage.todoList2.Children.Remove(this);
                     }
+                    else if (isImportantBtn.IsChecked == true)
+                    {
+                        todolistPage.todoList1.Children.Remove(this);
+                    }
+                    else
+                    {
+                        todolistPage.todoList0.Children.Remove(this);
+                    }
+                    addTodoUnitIntoTodoList();
+
                 }));
             });
-        }
 
+        }
+        private void addTodoUnitIntoTodoList()
+        {
+            if (isDoneBtn.IsChecked == true)
+            {
+                todolistPage.todoList2.Children.Insert(0, this);
+            }
+            else if (isImportantBtn.IsChecked == true)
+            {
+                int pos = todolistPage.todoList0.Children.Count;
+                // 二分查找第一个小于this的TodoUnit
+                int l = 0, r = pos - 1;
+                while (l <= r)
+                {
+                    int mid = (l + r) >> 1;
+                    if (todoInfo.CompareTo(((TodoUnit)todolistPage.todoList0.Children[mid]).todoInfo) >= 0)
+                    {
+                        pos = mid;
+                        r = mid - 1;
+                    }
+                    else
+                    {
+                        l = mid + 1;
+                    }
+                }
+                todolistPage.todoList0.Children.Insert(pos, this);
+            }
+            else
+            {
+                int pos = todolistPage.todoList1.Children.Count;
+                for (int i = 0; i < todolistPage.todoList1.Children.Count; i++)
+                {
+                    if (todoInfo.CompareTo(((TodoUnit)todolistPage.todoList1.Children[i]).todoInfo) >= 0)
+                    {
+                        pos = i;
+                        break;
+                    }
+                }
+                todolistPage.todoList1.Children.Insert(pos, this);
+            }
+        }
         private void isDoneBtn_Checked(object sender, RoutedEventArgs e)
         {
             todoContentText.Opacity = 0.7;

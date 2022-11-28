@@ -7,13 +7,13 @@
       xmlns:hc="https://handyorg.github.io/handycontrol"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="TodolistPage" Loaded="Page_Loaded">
+      Title="TodolistPage" Loaded="Page_Loaded" MouseDown="Page_MouseDown">
     <Page.RenderTransform>
         <TranslateTransform X="0" Y="0"/>
     </Page.RenderTransform>
     <Border Style="{StaticResource BorderClip}" x:Name="mainBorder" CornerRadius="20" Background="{DynamicResource SecondaryBlueColorA}">
         <Grid>
-            <ScrollViewer x:Name="todolistPanelScr" Grid.ZIndex="0" Margin="0" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer x:Name="todolistPanelScr" Grid.ZIndex="0" Margin="0" VerticalScrollBarVisibility="Auto" MouseDown="todolistPanelScr_MouseDown">
                 <Grid Margin="32 8 32 8">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -22,6 +22,8 @@
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Orientation="Vertical" VerticalAlignment="Top">
                         <Border Height="64"/>
+                        <StackPanel x:Name="todoList0" Orientation="Vertical" VerticalAlignment="Top">
+                        </StackPanel>
                         <StackPanel x:Name="todoList1" Orientation="Vertical" VerticalAlignment="Top">
                         </StackPanel>
                     </StackPanel>
@@ -42,8 +44,10 @@
 
                         </Button.Content>
                     </Button>
-                    <StackPanel x:Name="todoList2" Grid.Row="2" Orientation="Vertical" VerticalAlignment="Top">
-                        
+                    <StackPanel Grid.Row="2" Orientation="Vertical" VerticalAlignment="Top">
+                        <StackPanel x:Name="todoList2" Orientation="Vertical" VerticalAlignment="Top">
+                        </StackPanel>
+                        <Border Height="90"/>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
@@ -80,7 +84,7 @@
                         </Grid.ColumnDefinitions>
                         <Path x:Name="g0Focus0" Grid.Column="0" Visibility="Visible" Data="{DynamicResource add}" Stretch="Fill" Fill="{DynamicResource TextSecondaryColor}" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <Path x:Name="g0Focus1" Grid.Column="0" Visibility="Collapsed" Data="{DynamicResource uncheckedcircle}" Stretch="Fill" Stroke="{DynamicResource TextSecondaryColor}" StrokeThickness="1" Fill="{DynamicResource TextSecondaryColor}" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        
+
                         <Grid x:Name="g1Focus0" Grid.Column="1" VerticalAlignment="Center">
                             <hc:SimpleText Text="添加任务" FontSize="15"/>
                         </Grid>
@@ -92,16 +96,16 @@
                                     <hc:SimpleText x:Name="teammateList" Text="无"/>
                                 </StackPanel>
                             </StackPanel>
-                            
+
                         </Grid>
                         <StackPanel x:Name="spFuncArea" Grid.Column="2" Orientation="Horizontal" Margin="0 0 8 0" Visibility="Collapsed">
                             <hc:Divider Orientation="Vertical" Width="10" Height="60"/>
                             <StackPanel x:Name="functionalArea" Grid.Column="2" VerticalAlignment="Center" Width="Auto" Orientation="Vertical">
-                            <Button Style="{StaticResource ButtonPrimary}" Content="添加关联人" Width="200"/>
+                                <Button Style="{StaticResource ButtonPrimary}" Content="添加关联人" Width="200"/>
                                 <hc:DateTimePicker x:Name="dateTimePickers" Style="{StaticResource DateTimePickerExtend}" hc:InfoElement.Title="提醒日期:" hc:InfoElement.TitlePlacement="Left" Margin="0 4 0 0"/>
                             </StackPanel>
                         </StackPanel>
-                        
+
                     </Grid>
                 </Border>
             </StackPanel>
