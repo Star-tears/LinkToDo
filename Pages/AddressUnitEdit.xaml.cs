@@ -29,7 +29,7 @@ namespace LinkToDo.Pages
     {
         private UserInfo userInfo;
         private int mode;
-        private string tmp_img_path;
+        private string tmp_img_path { get; set; }
         private AddressbookPage _adbp;
         public AddressUnitEdit()
         {
@@ -79,6 +79,10 @@ namespace LinkToDo.Pages
             userInfo.Email = emailTextBox.Text;
             if (tmp_img_path != null && tmp_img_path.Length > 0)
             {
+                if (userInfo.ImgPath != "default.jpg")
+                {
+                    QiniuBase.DeleteImg(userInfo.ImgPath);
+                }
                 userInfo.ImgPath = UserInfo.genUUID() + tmp_img_path.Substring(tmp_img_path.Length - 4);
                 Console.WriteLine("Now user imgpath is: " + userInfo.ImgPath);
                 QiniuBase.UploadImg(tmp_img_path, userInfo.ImgPath);
@@ -95,6 +99,10 @@ namespace LinkToDo.Pages
             userInfo.Email = emailTextBox.Text;
             if (tmp_img_path != null && tmp_img_path.Length > 0)
             {
+                if (userInfo.ImgPath != "default.jpg")
+                {
+                    QiniuBase.DeleteImg(userInfo.ImgPath);
+                }
                 userInfo.ImgPath = UserInfo.genUUID() + tmp_img_path.Substring(tmp_img_path.Length - 4);
                 Console.WriteLine("Now user imgpath is: " + userInfo.ImgPath);
                 QiniuBase.UploadImg(tmp_img_path, userInfo.ImgPath);

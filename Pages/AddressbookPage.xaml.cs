@@ -110,6 +110,10 @@ namespace LinkToDo.Pages
                     {
                         if (addressUnit.IsChecked)
                         {
+                            if (addressUnit.userInfo.ImgPath != "default.jpg")
+                            {
+                                QiniuBase.DeleteImg(addressUnit.userInfo.ImgPath);
+                            }
                             userDataControl.deleteUserInfo(addressUnit.userInfo);
                             li.Add(addressUnit);
                         }
