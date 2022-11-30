@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:LinkToDo"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d" Name="home"
+        Icon="pack://application:,,,/Resources/Icon0.ico"
         Title="Link-todo" MinHeight="450" MinWidth="450" Height="650" Width="900" 
         WindowStartupLocation="CenterScreen" WindowState="Normal">
     <!--WindowStyle="None" Background="Transparent" AllowsTransparency="True" ResizeMode="NoResize"-->
