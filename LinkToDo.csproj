@@ -161,6 +161,7 @@
     <Compile Include="Myscripts\MysqlBase.cs" />
     <Compile Include="Myscripts\MyUtils.cs" />
     <Compile Include="Myscripts\QiniuBase.cs" />
+    <Compile Include="Myscripts\Settings.cs" />
     <Compile Include="Myscripts\TodoDataControl.cs" />
     <Compile Include="Myscripts\TodoInfo.cs" />
     <Compile Include="Myscripts\UserDataControl.cs" />

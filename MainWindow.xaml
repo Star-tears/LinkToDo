@@ -111,7 +111,7 @@
                 </Border>
 
                 <Border Grid.Row="1" Grid.ZIndex="10" HorizontalAlignment="Right" VerticalAlignment="Top" Width="Auto" Height="Auto">
-                    <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right" Height="Auto" MaxHeight="150">
+                    <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right" Height="Auto" MaxHeight="75">
                         <StackPanel hc:Growl.GrowlParent="True" VerticalAlignment="Top" Margin="0,4,8,4" Height="Auto"/>
                     </ScrollViewer>
                 </Border>
