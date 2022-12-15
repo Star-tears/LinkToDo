@@ -10,7 +10,10 @@
     <UserControl.RenderTransform>
         <TranslateTransform Y="0"/>
     </UserControl.RenderTransform>
-    <Border CornerRadius="10" Background="{DynamicResource SecondaryBlueColorA}" Width="200" Height="200" >
+    <Border CornerRadius="10" Width="200" Height="200" >
+        <Border.Background>
+            <SolidColorBrush Color="#dfedf9" Opacity="0"/>
+        </Border.Background>
         <Border x:Name="mainBorder" CornerRadius="10" Background="{StaticResource SecondaryBackgroundColor}" Opacity="0.7" Width="180" Height="180" Cursor="Hand">
             <Border.Triggers>
                 <EventTrigger RoutedEvent="Border.Loaded">
@@ -39,7 +42,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Border Style="{StaticResource BorderClip}" Grid.Row="0" CornerRadius="10" Margin="10 5 10 4">
+                <Border x:Name="imgBorder" Style="{StaticResource BorderClip}" Grid.Row="0" CornerRadius="10" Margin="10 5 10 4">
                     <Image x:Name="img" Source="https://src.star-tears.cn/img-bed/gitee-img-bed-before/4k%E5%A3%81%E7%BA%B8.jpg" Stretch="UniformToFill"/>
                 </Border>
                 <!--#region 姓名-->

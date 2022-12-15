@@ -58,7 +58,7 @@ namespace LinkToDo.Myscripts
         }
         public DataTable queryUserInfo()
         {
-            string sql = "SELECT * FROM userinfo";
+            string sql = "SELECT uuid,name,phone,email,imgpath FROM userinfo";
             DataSet ds = mysqlBase.GetDataSet(sql, "userinfo");
             DataTable dt = ds.Tables[0];
             if (dt.Rows.Count != 0)

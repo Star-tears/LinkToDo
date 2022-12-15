@@ -5,9 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LinkToDo.Pages" xmlns:local1="clr-namespace:LinkToDo.Components"
       xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:my="clr-namespace:LinkToDo.Components"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="TodolistPage" Loaded="Page_Loaded" MouseDown="Page_MouseDown">
+      Title="TodolistPage" Loaded="Page_Loaded" MouseDown="Page_MouseDown" KeyDown="Page_KeyDown">
     <Page.RenderTransform>
         <TranslateTransform X="0" Y="0"/>
     </Page.RenderTransform>
@@ -70,6 +71,24 @@
 
                 </Grid>
             </StackPanel>
+            <Border x:Name="addressbookBorder" Grid.ZIndex="4" CornerRadius="10" Margin="4 70 4 90" Visibility="Collapsed">
+                <Border.RenderTransform>
+                    <TranslateTransform X="0" Y="0"/>
+                </Border.RenderTransform>
+                <Border.Background>
+                    <SolidColorBrush Color="#E2F2C7" Opacity="0.6"/>
+                </Border.Background>
+                <Grid x:Name="addressBookPanel">
+                    <ScrollViewer x:Name="scr" Margin="0" VerticalScrollBarVisibility="Auto" Grid.Row="0">
+                        <WrapPanel x:Name="wrapPanel">
+                            <my:AddressUnit Visibility="Visible"/>
+                        </WrapPanel>
+                    </ScrollViewer>
+                    <Button x:Name="addressbookRefreshBtn" Grid.ZIndex="2" Content="刷新" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 110 10" hc:BorderElement.CornerRadius="5" Background="{DynamicResource TEAL_C}" Foreground="{DynamicResource TextIconBrush}" Height="42" Width="85" FontSize="16" Click="addressbookRefreshBtn_Click"/>
+                    <Button x:Name="emailListConfirmBtn" Grid.ZIndex="1" Content="确认" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 15 10" hc:BorderElement.CornerRadius="5" Background="{DynamicResource PrimaryBrush}" Foreground="{DynamicResource TextIconBrush}" Height="42" Width="85" FontSize="16" Click="emailListConfirmBtn_Click"/>
+                </Grid>
+            </Border>
+            
             <Border x:Name="b2" Grid.ZIndex="1" Height="90" VerticalAlignment="Bottom" Background="{DynamicResource SecondaryBlueColorA}" Opacity="0.8"/>
             <StackPanel Grid.ZIndex="3" Orientation="Vertical" VerticalAlignment="Bottom">
                 <Border Height="Auto" CornerRadius="10" Background="{StaticResource SecondaryBackgroundColor}" Margin="32 8 32 4" MouseDown="Border_MouseDown">
@@ -101,7 +120,7 @@
                         <StackPanel x:Name="spFuncArea" Grid.Column="2" Orientation="Horizontal" Margin="0 0 8 0" Visibility="Collapsed">
                             <hc:Divider Orientation="Vertical" Width="10" Height="60"/>
                             <StackPanel x:Name="functionalArea" Grid.Column="2" VerticalAlignment="Center" Width="Auto" Orientation="Vertical">
-                                <Button Style="{StaticResource ButtonPrimary}" Content="添加关联人" Width="200"/>
+                                <Button x:Name="addEmaillistBtn" Style="{StaticResource ButtonPrimary}" Content="添加关联人" Width="200" Click="addEmaillistBtn_Click"/>
                                 <hc:DateTimePicker x:Name="dateTimePickers" Style="{StaticResource DateTimePickerExtend}" hc:InfoElement.Title="提醒日期:" hc:InfoElement.TitlePlacement="Left" Margin="0 4 0 0"/>
                             </StackPanel>
                         </StackPanel>

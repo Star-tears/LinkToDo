@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,21 +23,46 @@ namespace LinkToDo.Components
     /// </summary>
     public partial class AddressUnit : UserControl
     {
-
+        struct MyColor
+        {
+            public byte r, g, b, a;
+            public MyColor(byte r, byte g, byte b, byte a)
+            {
+                this.r = r;
+                this.g = g;
+                this.b = b;
+                this.a = a;
+            }
+        }
+        private List<MyColor> myColors = new List<MyColor>();
+        private int mode = 0;
         public bool IsChecked { get; set; } = false;
         public UserInfo userInfo { get; set; }
         public AddressUnit()
         {
             InitializeComponent();
         }
-        public AddressUnit(UserInfo uI)
+        public AddressUnit(UserInfo uI, int mode = 0)
         {
             InitializeComponent();
+            myColors.Add(new MyColor(255, 85, 85, 255));
+            myColors.Add(new MyColor(102, 221, 209, 255));
+            this.mode = mode;
             userInfo = uI;
             nameLabel.Text = userInfo.Name;
             phoneLabel.Text = userInfo.PhoneNum;
             emailLabel.Text = userInfo.Email;
-            img.Source=userInfo.getImg();
+            BitmapImage bitmapImage = userInfo.getImg();
+            img.Source = bitmapImage;
+            bitmapImage.DownloadCompleted += (o, earg) =>
+            {
+                Console.WriteLine("width: " + bitmapImage.PixelWidth + ",height: " + bitmapImage.PixelHeight);
+                Console.WriteLine((double)bitmapImage.PixelWidth / bitmapImage.PixelHeight);
+                if ((double)bitmapImage.PixelWidth / bitmapImage.PixelHeight < 1.2)
+                {
+                    imgBorder.Margin = new Thickness(40, 5, 40, 4);
+                }
+            };
         }
 
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
@@ -122,10 +148,10 @@ namespace LinkToDo.Components
                 {
                     Value = new Color()
                     {
-                        R = 255,
-                        G = 85,
-                        B = 85,
-                        A = 255
+                        R = myColors[mode].r,
+                        G = myColors[mode].g,
+                        B = myColors[mode].b,
+                        A = myColors[mode].a
                     },
                     EasingFunction = new CircleEase() { EasingMode = EasingMode.EaseInOut },
                     KeyTime = TimeSpan.FromSeconds(0.5)
@@ -145,10 +171,10 @@ namespace LinkToDo.Components
                 {
                     Value = new Color()
                     {
-                        R = 255,
-                        G = 85,
-                        B = 85,
-                        A = 255
+                        R = myColors[mode].r,
+                        G = myColors[mode].g,
+                        B = myColors[mode].b,
+                        A = myColors[mode].a
                     },
 
                     EasingFunction = new CircleEase() { EasingMode = EasingMode.EaseInOut },
