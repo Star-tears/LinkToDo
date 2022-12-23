@@ -74,9 +74,9 @@ namespace LinkToDo.Myscripts
         public static string QiniuSecretKey { get; } = "";
 
 
-        //邮件服务发送方
+        // 邮件服务发送方
         public static string EmailFrom { get; } = "xxxxxxxxx@qq.com";
-        //邮件服务发送方授权码
+        // 邮件服务发送方授权码
         public static string EmailPwd { get; } = "ajrtpsdsdsncfdgz";
     }
 }
